@@ -1,8 +1,9 @@
+import React from "react"
 import IconCross from "./icons/IconCross"
 import IconCheck from "./icons/IconCheck"
 
 
-const TodoItem = ({ todo, completeTodo, deleteTodo }) => {
+const TodoItem = React.forwardRef(({ todo, completeTodo, deleteTodo, ...props }, ref) => {
 
     const { id, title, completed } = todo
 
@@ -15,7 +16,7 @@ const TodoItem = ({ todo, completeTodo, deleteTodo }) => {
     }
 
     return (
-        <article className="flex items-center justify-between gap-4 px-4 py-3 transition-all duration-700 border-b dark:border-b-gray-700">
+        <article ref={ref} {...props} className="flex items-center justify-between gap-4 px-4 py-3 transition-all duration-700 border-b dark:border-b-gray-700">
             <button className="inline-block w-5 h-5 transition-all duration-700 border border-gray-300 rounded-full dark:border-gray-700" onClick={handleComplete}>
                 {completed && <IconCheck />}
             </button>
@@ -27,6 +28,6 @@ const TodoItem = ({ todo, completeTodo, deleteTodo }) => {
             </button>
         </article>
     )
-}
+})
 
 export default TodoItem
